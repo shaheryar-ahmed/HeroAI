@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeroAI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;500;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #05060b;
+      color: #e0e8ff;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 120px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #0a0d17, #071a2c);
+      border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 62px;
+      color: #00eaff;
+      text-shadow: 0 0 15px #00eaff;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #34dcff;
+      text-shadow: 0 0 10px #34dcff;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      padding: 15px 34px;
+      background: #00eaff;
+      color: #000;
+      border-radius: 12px;
+      font-size: 20px;
+      text-decoration: none;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 0 15px #00eaff;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      box-shadow: 0 0 32px #00eaff;
+      transform: scale(1.05);
+    }
+
+    .section {
+      padding: 80px 20px;
+      text-align: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: rgba(15, 20, 40, 0.7);
+      border: 2px solid rgba(0, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 14px;
+      backdrop-filter: blur(4px);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      border-color: #00eaff;
+      box-shadow: 0 0 15px #00eaff;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #00eaff44;
+    }
+
+    footer {
+      padding: 50px;
+      text-align: center;
+      background: #05060b;
+      font-size: 14px;
+      border-top: 1px solid #00eaff33;
+    }
+
+    /* Responsive */
+    @media (max-width:768px) {
+      h1 {
+        font-size: 44px;
+      }
+
+      h2 {
+        font-size: 30px;
+      }
+
+      .section {
+        padding: 60px 15px;
+      }
+    }
+
+    /* Header Styling */
+    .topbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(10, 15, 30, 0.85);
+      border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #00eaff;
+      text-shadow: 0 0 10px #00eaff;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .nav a {
+      color: #c8eaff;
+      text-decoration: none;
+      font-weight: 600;
+      font-family: 'Orbitron', sans-serif;
+      transition: 0.3s;
+      padding: 5px 10px;
+    }
+
+    .nav a:hover {
+      color: #00eaff;
+      text-shadow: 0 0 8px #00eaff;
+    }
+
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 1000;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: #00eaff;
+      margin: 2px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(10, 15, 30, 0.95);
+        padding: 20px;
+        border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+      }
+
+      .nav.active {
+        display: flex;
+      }
+
+      .nav a {
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="logo">HeroAI</div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="nav">
+      <a href="#hero">Home</a>
+      <a href="#how">How It Works</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+
+  <section id="hero" style="padding-top:140px; text-align:center;">
+    <h1>HeroAI</h1>
+    <p>The Cyberpunk AI Forge for Game UI & 2D Worlds</p><br>
+    <a class="btn" href="#contact">Join Waitlist</a>
+  </section>
+
+  <section class="section">
+    <h2>Next‑Gen Game Art Creation</h2>
+    <p>HeroAI turns text prompts into AAA‑style UI, HUDs, icons, characters, and game scenes.
+      Build futuristic, fantasy, and stylized game visuals in seconds.</p>
+  </section>
+
+  <section class="section">
+    <h2>Features</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>⚡ Instant UI</h3>
+        <p>Buttons, HUD, menus, health bars — auto‑designed in seconds.</p>
+      </div>
+      <div class="card">
+        <h3>🎮 Game‑Ready Art</h3>
+        <p>2D scenes, sprites, avatars, cyberpunk & fantasy packs.</p>
+      </div>
+      <div class="card">
+        <h3>🧠 AI Style Brain</h3>
+        <p>Fine‑tuned for game art workflows & stylization.</p>
+      </div>
+      <div class="card">
+        <h3>🔧 Export Tools</h3>
+        <p>Layers, UI kits, PNGs & vector asset packs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <h2>How It Works</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1️⃣ Prompt</h3>
+        <p>Describe your UI/game assets in natural language.</p>
+      </div>
+      <div class="card">
+        <h3>2️⃣ AI Generates</h3>
+        <p>HeroAI builds pixel‑perfect UI and 2D game assets.</p>
+      </div>
+      <div class="card">
+        <h3>3️⃣ Export</h3>
+        <p>Download layered files and import into your engine.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>✔️ v1.0</h3>
+        <p>UI + HUD Generator, 2D Profile Art</p>
+      </div>
+      <div class="card">
+        <h3>🚧 v1.5</h3>
+        <p>Sprite sheets, animation frames, icon packs</p>
+      </div>
+      <div class="card">
+        <h3>🛠️ v2.0</h3>
+        <p>AI Texture Engine + Unity/Unreal plugins</p>
+      </div>
+      <div class="card">
+        <h3>🌌 v3.0</h3>
+        <p>Full AI Game Asset Worldbuilder</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <h2>AI Showcase</h2>
+    <div class="grid">
+      <div class="card"><img src="./assets/IMG_8138.JPG"></div>
+      <div class="card"><img src="./assets/IMG_8139.JPG"></div>
+      <div class="card"><img src="./assets/IMG_8140.JPG"></div>
+      <div class="card"><img src="./assets/IMG_8141.JPG"></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About HeroAI</h2>
+    <p>HeroAI is built for game developers, artists, and studios who want to accelerate production and achieve AAA
+      quality at lightning speed with cyberpunk‑grade creativity.</p>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <p><strong>Address:</strong> 2201 Chatham Pl, Aubrey, TX 76227</p>
+    <p><strong>Phone:</strong> +1 334‑400‑9310</p>
+    <p><strong>Email:</strong> ahmad.safdar@3hlabs.io</p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/company/3hlabs" style="color:#00eaff;">3HLabs</a>
+    </p>
+  </section>
+
+  <footer>
+    © 2025 HeroAI. All rights reserved.
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.nav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+
+</html>
